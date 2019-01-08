@@ -11,9 +11,9 @@ GO
 CREATE TABLE [AdminDetails].[DatabaseChangeLog](
 	[ChangeId] [int] IDENTITY(1,1) NOT NULL,
 	[ChangeDate] [datetime] NOT NULL,
-	[UserName] [nvarchar](50) NOT NULL,
-	[SecurityName] [nvarchar](50) NOT NULL,
-	[LoginName] [nvarchar](50) NOT NULL,
+	[NameUser] [nvarchar](50) NOT NULL,
+	[NameSecurity] [nvarchar](50) NOT NULL,
+	[NameLogin] [nvarchar](50) NOT NULL,
 	[EventType] [nvarchar](100) NULL,
 	[ObjectName] [nvarchar](100) NULL,
 	[ObjectType] [nvarchar](100) NULL,
