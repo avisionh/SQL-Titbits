@@ -1,11 +1,4 @@
-USE [<database_name>]
-GO
-
-/****** Object:  View [AdminDetails].[vw_DatabaseChangeLog]    Script Date: 08/01/2019 17:18:12 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
+USE [HE-AN-DATA-NS]
 GO
 
 ----------------------------------------------------------------------------------------------
@@ -15,15 +8,20 @@ GO
 --					in particular, [object_id], to obtain the schema name of each
 --					object captured from the database trigger.
 -- Author:			Avision Ho	
--- Creation Date:	18/01/2019
+-- Creation Date:	22/03/2019
+
 -----------------
 -- Change History
 -----------------
+
 --S.No.			Date		Author			Change Description
---1.0			18/01/2019	AH				Initial base view of table
+--1.0			22/03/2019	AH				Initial base view of table
+
 ----------------------------------------------------------------------------------------------
-CREATE VIEW [AdminDetails].[vw_DatabaseChangeLog]
+
+CREATE VIEW [AuditDetails].[vw_DatabaseChangeLog]
 AS 
+
 SELECT changelog.[ChangeId]
       ,changelog.[ChangeDate]
       ,changelog.[NameUser]
@@ -36,11 +34,10 @@ SELECT changelog.[ChangeId]
       ,changelog.[ObjectName]
       ,[ObjectType] = admintable.[type_desc]
       ,changelog.[TsqlCode]
-FROM [AdminDetails].[DatabaseChangeLog] AS changelog
+FROM [AuditDetails].[DatabaseChangeLog] AS changelog
 LEFT JOIN [sys].[all_objects] AS admintable
 	ON changelog.[objectName] = admintable.[name]
 -- Keep only 'genuine'/real-people SQL users
-WHERE changelog.[CurrentUser] != 'dbo'
+WHERE changelog.[NameUser] != 'dbo'
+
 GO
-
-
